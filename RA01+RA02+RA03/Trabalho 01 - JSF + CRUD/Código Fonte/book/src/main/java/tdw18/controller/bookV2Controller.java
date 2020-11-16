@@ -3,32 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tdw.controller;
+package tdw18.controller;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import tdw.entities.Book;
-import tdw.sessionbean.BookFacadeLocal;
+import tdw18.entities.Bookv2;
+import tdw18.sessionbean.Bookv2FacadeLocal;
 
 /**
  *
- * @author Cristina
+ * @author ocimi
  */
-@Named(value = "bookController")
+@Named(value = "bookV2Controller")
 @SessionScoped
-public class bookController implements Serializable {
+public class bookV2Controller implements Serializable {
 
     @EJB
-    private BookFacadeLocal booksFacade;
+    private Bookv2FacadeLocal booksFacade;
 
-    private Book selectedBook;
+    private Bookv2 selectedBook;
 
-    private final Book book = new Book();
+    private final Bookv2 bookv2 = new Bookv2();
     private String name;
     private String author;
+    private String coAuthor;
+    private String isbn;
     private Integer year;
     private String category;
     private float price;
@@ -36,14 +38,14 @@ public class bookController implements Serializable {
     /**
      * Creates a new instance of bookController
      */
-    public bookController() {
+    public bookV2Controller() {
     }
 
-    public Book getSelectedBook() {
+    public Bookv2 getSelectedBook() {
         return selectedBook;
     }
 
-    public void setSelectedBook(Book selectedBook) {
+    public void setSelectedBook(Bookv2 selectedBook) {
         this.selectedBook = selectedBook;
     }
 
@@ -63,6 +65,22 @@ public class bookController implements Serializable {
         this.author = author;
     }
 
+    public String getCoAuthor() {
+        return coAuthor;
+    }
+
+    public void setCoAuthor(String coAuthor) {
+        this.coAuthor = coAuthor;
+    }
+
+        public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+    
     public Integer getYear() {
         return year;
     }
@@ -89,6 +107,8 @@ public class bookController implements Serializable {
 
     public void emptyVariables() {
         this.author = "";
+        this.coAuthor = "";
+        this.isbn = "";
         this.category = "";
         this.name = "";
         this.price = 0;
@@ -96,26 +116,28 @@ public class bookController implements Serializable {
     }
 
     public String createBook() {
-        this.book.setAuthor(this.author);
-        this.book.setCategory(this.category);
-        this.book.setName(this.name);
-        this.book.setPrice(this.price);
-        this.book.setYear(this.year);
-        this.booksFacade.create(this.book);
+        this.bookv2.setAuthor(this.author);
+        this.bookv2.setCoAuthor(this.coAuthor);
+        this.bookv2.setIsbn(this.isbn);
+        this.bookv2.setCategory(this.category);
+        this.bookv2.setName(this.name);
+        this.bookv2.setPrice(this.price);
+        this.bookv2.setYear(this.year);
+        this.booksFacade.create(this.bookv2);
         this.emptyVariables();
         return "index.xhtml?faces-redirect=true";
     }
 
-    public List<Book> getAllBooks() {
+    public List<Bookv2> getAllBooks() {
         return this.booksFacade.findAll();
     }
 
-    public String updateBook(Book book) {
+    public String updateBook(Bookv2 book) {
         this.booksFacade.edit(this.selectedBook);
         return "index.xhtml?faces-redirect=true";
     }
 
-    public String deleteBook(Book book) {
+    public String deleteBook(Bookv2 book) {
         this.booksFacade.remove(book);
         return "index.xhtml?faces-redirect=true";
     }

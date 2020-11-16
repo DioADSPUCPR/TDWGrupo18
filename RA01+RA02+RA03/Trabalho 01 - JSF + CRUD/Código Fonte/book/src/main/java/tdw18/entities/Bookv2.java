@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tdw.entities;
+package tdw18.entities;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -17,22 +17,26 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Cristina
+ * @author ocimi
  */
 @Entity
-@Table(name = "book")
+@Table(name = "bookv2")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b"),
-    @NamedQuery(name = "Book.findById", query = "SELECT b FROM Book b WHERE b.id = :id"),
-    @NamedQuery(name = "Book.findByName", query = "SELECT b FROM Book b WHERE b.name = :name"),
-    @NamedQuery(name = "Book.findByAuthor", query = "SELECT b FROM Book b WHERE b.author = :author"),
-    @NamedQuery(name = "Book.findByCategory", query = "SELECT b FROM Book b WHERE b.category = :category"),
-    @NamedQuery(name = "Book.findByYear", query = "SELECT b FROM Book b WHERE b.year = :year"),
-    @NamedQuery(name = "Book.findByPrice", query = "SELECT b FROM Book b WHERE b.price = :price")})
-public class Book implements Serializable {
+    @NamedQuery(name = "Bookv2.findAll", query = "SELECT b FROM Bookv2 b"),
+    @NamedQuery(name = "Bookv2.findById", query = "SELECT b FROM Bookv2 b WHERE b.id = :id"),
+    @NamedQuery(name = "Bookv2.findByName", query = "SELECT b FROM Bookv2 b WHERE b.name = :name"),
+    @NamedQuery(name = "Bookv2.findByAuthor", query = "SELECT b FROM Bookv2 b WHERE b.author = :author"),
+    @NamedQuery(name = "Bookv2.findByCoAuthor", query = "SELECT b FROM Bookv2 b WHERE b.coAuthor = :coAuthor"),
+    @NamedQuery(name = "Bookv2.findByIsbn", query = "SELECT b FROM Bookv2 b WHERE b.isbn = :isbn"),
+    @NamedQuery(name = "Bookv2.findByCategory", query = "SELECT b FROM Bookv2 b WHERE b.category = :category"),
+    @NamedQuery(name = "Bookv2.findByYear", query = "SELECT b FROM Bookv2 b WHERE b.year = :year"),
+    @NamedQuery(name = "Bookv2.findByPrice", query = "SELECT b FROM Bookv2 b WHERE b.price = :price")})
+public class Bookv2 implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,6 +54,12 @@ public class Book implements Serializable {
     @Size(min = 1, max = 254)
     @Column(name = "author")
     private String author;
+    @Size(max = 100)
+    @Column(name = "coAuthor")
+    private String coAuthor;
+    @Size(max = 100)
+    @Column(name = "isbn")
+    private String isbn;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 254)
@@ -62,14 +72,14 @@ public class Book implements Serializable {
     @Column(name = "price")
     private float price;
 
-    public Book() {
+    public Bookv2() {
     }
 
-    public Book(Integer id) {
+    public Bookv2(Integer id) {
         this.id = id;
     }
 
-    public Book(Integer id, String name, String author, String category, float price) {
+    public Bookv2(Integer id, String name, String author, String category, float price) {
         this.id = id;
         this.name = name;
         this.author = author;
@@ -99,6 +109,22 @@ public class Book implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getCoAuthor() {
+        return coAuthor;
+    }
+
+    public void setCoAuthor(String coAuthor) {
+        this.coAuthor = coAuthor;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getCategory() {
@@ -135,10 +161,10 @@ public class Book implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Book)) {
+        if (!(object instanceof Bookv2)) {
             return false;
         }
-        Book other = (Book) object;
+        Bookv2 other = (Bookv2) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -147,7 +173,7 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "tdw.entities.Book[ id=" + id + " ]";
+        return "tdw18.entities.Bookv2[ id=" + id + " ]";
     }
     
 }

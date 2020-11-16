@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tdw.sessionbean;
+package tdw18.sessionbean;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import tdw.entities.Book;
+import tdw18.entities.Bookv2;
 
 /**
  *
- * @author Cristina
+ * @author ocimi
  */
 @Stateless
-public class BookFacade extends AbstractFacade<Book> implements BookFacadeLocal {
+public class Bookv2Facade extends AbstractFacade<Bookv2> implements Bookv2FacadeLocal {
 
-    @PersistenceContext(unitName = "TDW_Book1_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "tdw18_book_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
     @Override
@@ -25,8 +25,8 @@ public class BookFacade extends AbstractFacade<Book> implements BookFacadeLocal 
         return em;
     }
 
-    public BookFacade() {
-        super(Book.class);
+    public Bookv2Facade() {
+        super(Bookv2.class);
     }
     
 }
