@@ -29,13 +29,19 @@ public class ObjectModelBean implements Serializable {
     List<DOMTreeRow> rowList;
     
     /* Form properties */
-    private String name = "Duke Book";
-    private String author = "Duke Sr.";
-    private String coAuthor = "Duke Jr.";
-    private String isbn = "10-202-303-5";
-    private int year = 2014;
-    private String category = "Duke Duke";
-    private float price = (float) 20.5;
+    protected static final String PHONE_TYPE_HOME = "Home";
+    protected static final String PHONE_TYPE_MOBILE = "Mobile";
+    protected String firstName = "Duke";
+    protected String lastName = "Java";
+    protected int age = 18;
+    protected String streetAddress = "100 Internet Dr";
+    protected String city = "JavaTown";
+    protected String state = "JA";
+    protected String postalCode = "12345";
+    protected String phoneNumber1 = "111-111-1111";
+    protected String phoneType1 = PHONE_TYPE_MOBILE;
+    protected String phoneNumber2 = "222-222-2222";
+    protected String phoneType2 = PHONE_TYPE_HOME;
     protected String jsonTextArea = "";
     
     static final Logger log = Logger.getLogger("ObjectModelBean");
@@ -43,47 +49,77 @@ public class ObjectModelBean implements Serializable {
     public ObjectModelBean() {}
     
     /* Getters and setters */
-    public String getName() {
-        return name;
+    public String getPhoneTypeHome() {
+        return PHONE_TYPE_HOME;
     }
-    public void setName(String name) {
-        this.name = name;
+    public String getPhoneTypeMobile() {
+        return PHONE_TYPE_MOBILE;
     }
-    public String getAuthor() {
-        return author;
+    public String getFirstName() {
+        return firstName;
     }
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setFirstName(String firtName) {
+        this.firstName = firtName;
     }
-    public String getCoAuthor() {
-        return coAuthor;
+    public String getLastName() {
+        return lastName;
     }
-    public void setCoAuthor(String coAuthor) {
-        this.coAuthor = coAuthor;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
-    public String getIsbn() {
-        return isbn;
+    public int getAge() {
+        return age;
     }
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setAge(int age) {
+        this.age = age;
     }
-    public int getYear() {
-        return year;
+    public String getStreetAddress() {
+        return streetAddress;
     }
-    public void setYear(int year) {
-        this.year = year;
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
     }
-    public String getCategory() {
-        return category;
+    public String getCity() {
+        return city;
     }
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCity(String city) {
+        this.city = city;
     }
-    public float getPrice() {
-        return price;
+    public String getState() {
+        return state;
     }
-    public void setPrice(float price) {
-        this.price = price;
+    public void setState(String state) {
+        this.state = state;
+    }
+    public String getPostalCode() {
+        return postalCode;
+    }
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+    public String getPhoneNumber1() {
+        return phoneNumber1;
+    }
+    public void setPhoneNumber1(String phoneNumber1) {
+        this.phoneNumber1 = phoneNumber1;
+    }
+    public String getPhoneType1() {
+        return phoneType1;
+    }
+    public void setPhoneType1(String phoneType1) {
+        this.phoneType1 = phoneType1;
+    }
+    public String getPhoneNumber2() {
+        return phoneNumber2;
+    }
+    public void setPhoneNumber2(String phoneNumber2) {
+        this.phoneNumber2 = phoneNumber2;
+    }
+    public String getPhoneType2() {
+        return phoneType2;
+    }
+    public void setPhoneType2(String phoneType2) {
+        this.phoneType2 = phoneType2;
     }
     public String getJsonTextArea() {
         return jsonTextArea;
@@ -106,13 +142,20 @@ public class ObjectModelBean implements Serializable {
     public String buildJson() {        
         /* Build JSON Object Model */
         JsonObject model = Json.createObjectBuilder()
-            .add("name", name)
-            .add("author", author)
-            .add("coAuthor", coAuthor)
-            .add("isbn", isbn)
-            .add("year", year)
-            .add("category", category)
-            .add("price", price)
+            .add("firstName", firstName)
+            .add("lastName", lastName)
+            .add("age", age)
+            .add("streetAddress", streetAddress)
+            .add("city", city)
+            .add("state", state)
+            .add("postalCode", postalCode)
+            .add("phoneNumbers", Json.createArrayBuilder()
+                .add(Json.createObjectBuilder()
+                    .add("number", phoneNumber1)
+                    .add("type", phoneType1))
+                .add(Json.createObjectBuilder()
+                    .add("number", phoneNumber2)
+                    .add("type", phoneType2)))
         .build();
         
         /* Write JSON Output */

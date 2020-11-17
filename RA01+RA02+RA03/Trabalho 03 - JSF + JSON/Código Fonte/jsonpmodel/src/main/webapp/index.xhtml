@@ -22,23 +22,44 @@
   <h:form>
       <table>
           <tr>
-              <td align="right">Name:</td>
-              <td><h:inputText value="#{objectModelBean.name}"/></td>
+              <td align="right">First Name:</td>
+              <td><h:inputText value="#{objectModelBean.firstName}"/></td>
           </tr><tr>
-              <td align="right">Author:</td>
-              <td><h:inputText value="#{objectModelBean.author}"/></td>
+              <td align="right">Last Name:</td>
+              <td><h:inputText value="#{objectModelBean.lastName}"/></td>
           </tr><tr>
-              <td align="right">CoAuthor:</td>
-              <td><h:inputText value="#{objectModelBean.coAuthor}"/></td>
+              <td align="right">Age:</td>
+              <td><h:inputText value="#{objectModelBean.age}"/></td>
           </tr><tr>
-              <td align="right">ISBN:</td>
-              <td><h:inputText value="#{objectModelBean.isbn}"/></td>
+              <td align="right">Street Address:</td>
+              <td><h:inputText value="#{objectModelBean.streetAddress}"/></td>
           </tr><tr>
-              <td align="right">Category:</td>
-              <td><h:inputText value="#{objectModelBean.category}"/></td>
+              <td align="right">City:</td>
+              <td><h:inputText value="#{objectModelBean.city}"/></td>
           </tr><tr>
-              <td align="right">Price:</td>
-              <td><h:inputText value="#{objectModelBean.price}"/></td>
+              <td align="right">State:</td>
+              <td><h:inputText value="#{objectModelBean.state}"/></td>
+          </tr><tr>
+              <td align="right">ZIP code:</td>
+              <td><h:inputText value="#{objectModelBean.postalCode}"/></td>
+          </tr><tr>
+              <td align="right">Phone Number 1:</td>
+              <td><h:inputText value="#{objectModelBean.phoneNumber1}"/> &nbsp; 
+                  <h:selectOneMenu value="#{objectModelBean.phoneType1}">
+                      <f:selectItem itemValue="#{objectModelBean.phoneTypeHome}"
+                                    itemLabel="#{objectModelBean.phoneTypeHome}"/>
+                      <f:selectItem itemValue="#{objectModelBean.phoneTypeMobile}"
+                                    itemLabel="#{objectModelBean.phoneTypeMobile}"/>
+                  </h:selectOneMenu></td>
+          </tr><tr>
+              <td align="right">Phone Number 2:</td>
+              <td><h:inputText value="#{objectModelBean.phoneNumber2}"/> &nbsp; 
+                  <h:selectOneMenu value="#{objectModelBean.phoneType2}">
+                      <f:selectItem itemValue="#{objectModelBean.phoneTypeHome}"
+                                    itemLabel="#{objectModelBean.phoneTypeHome}"/>
+                      <f:selectItem itemValue="#{objectModelBean.phoneTypeMobile}"
+                                    itemLabel="#{objectModelBean.phoneTypeMobile}"/>
+                  </h:selectOneMenu></td>
           </tr>
       </table>
       <p><h:commandButton value="Create a JSON Object" action="#{objectModelBean.buildJson()}"/></p>
